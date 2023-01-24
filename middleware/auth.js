@@ -10,7 +10,6 @@ function auth(req, res, next) {
     try {
         const decoded = jwt.verify(token, process.env.SECRET_KEY)
         req.user = decoded.user_id;
-        console.log(decoded)
         next();
     }
     catch (ex) {

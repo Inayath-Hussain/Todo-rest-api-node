@@ -29,6 +29,7 @@ router.post('/', async (req, res) => {
     }
 
     const token = user.generateAuthToken()
+    res.header('Access-Control-Expose-Headers', 'x-auth-token')
     res.header('x-auth-token', token)
     res.status(200).send()
 })

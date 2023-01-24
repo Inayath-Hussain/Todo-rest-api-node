@@ -5,13 +5,11 @@ const auth = require('../middleware/auth')
 router.get('/', auth, async (req, res) => {
     const tasks = await Task.find({ user_id: req.user })
 
-    // console.log(tasks)
     res.status(200).send(tasks)
 })
 
 
 router.post('/', auth, async (req, res) => {
-    // console.log(req.body)
     const { error } = validate(req.body.detail);
     if (error) return res.status(400).send(error.details[0].message)
 
@@ -42,8 +40,6 @@ router.patch('/', auth, async (req, res) => {
 
 
 router.delete('/:id', auth, async (req, res) => {
-    console.log('delete', req.params.id)
-    // console.log(req.body)
     await Task.findOneAndRemove({ _id: req.params.id })
 
     res.status(200).send({ message: 'success' })
